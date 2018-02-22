@@ -13,7 +13,7 @@ namespace Aero.Build.Tasks
         {
             //Set the Version info
             var versionService = context.ServiceProvider.GetService<IVersionSevice>();
-            versionService.UpdateFiles(context.Argument<string>("AppVersion"), context.ProjectsPath);
+            versionService.UpdateFiles(context.Argument<string>("AppVersion"), context.ProjectsPath, "VersionAttributeDoesNotExist");
 
             //Check out the docs on DotNetCore settings. There are some things we want to set, like Configuration, and the replacement for rebuild. 
 
@@ -24,7 +24,10 @@ namespace Aero.Build.Tasks
             };
 
             var dotNetCore = context.ServiceProvider.GetService<IDotNetCoreCupCake>();
-            dotNetCore.Build($"{context.ProjectsPath}/Aero.Common.Azure/Aero.Common.Azure.csproj", buildSettings);
+
+            //This build project is going to build everything in debug mode. Then we will build in release mode. 
+            dotNetCore.Build($"{context.ProjectsPath}/Aero.Azure/Aero.Azure.csproj", buildSettings);
+            dotNetCore.Build($"{context.ProjectsPath}/Aero.Cake/Aero.Cake.csproj", buildSettings);
         }
     }
 }

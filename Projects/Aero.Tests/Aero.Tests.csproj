@@ -3,10 +3,20 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
 
+	<FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <Version>1.0.0</Version>
+	
     <IsPackable>false</IsPackable>
 
     <RootNamespace>Aero.Common</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestResults\**" />
+    <EmbeddedResource Remove="TestResults\**" />
+    <None Remove="TestResults\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="4.19.4" />

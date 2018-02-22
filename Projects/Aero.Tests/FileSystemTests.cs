@@ -22,7 +22,6 @@ namespace Aero.Common
             }
 
             _testDirectory.Create();
-
         }
 
         ~FileSystemTests()
@@ -120,7 +119,6 @@ namespace Aero.Common
 
             subDirs.Count().Should().Be(1);
             subDirs.Single(di => di.FullName == Path.Combine(_testDirectory.FullName, "NewDirectory")).Should().NotBeNull();
-
         }
 
         [Fact]
@@ -141,33 +139,34 @@ namespace Aero.Common
             //Assert
             var subDirs = _testDirectory.GetDirectories();
             subDirs.Count().Should().Be(1);
-            subDirs.Single(di => di.FullName == newDirectoryName).CreationTimeUtc.Should().BeOnOrAfter(now);
-
+            subDirs.Single(di => di.FullName == newDirectoryName).CreationTimeUtc.Should().BeCloseTo(now,2000);
         }
 
         [Fact]
         public void CreateDirectory_When_Directory_Exists_Then_Do_Nothing()
         {
+            //Pre-Assert
+            _testDirectory.GetDirectories().Length.Should().Be(0);
+
             //Arrange
             var newDirectoryName = Path.Combine(_testDirectory.FullName, "NewDirectory");
             var fs = new FileSystem();
             fs.CreateDirectory(newDirectoryName); //Create directory so it is pre-existing
 
             //Pre-Assert
-            _testDirectory.GetDirectories().Count().Should().Be(1);
+            _testDirectory.GetDirectories().Length.Should().Be(1);
             var createdDate = _testDirectory.GetDirectories().Single(x=>x.FullName == newDirectoryName).CreationTimeUtc;
 
             //Sleep long enough to allow system time to "tick"
-            System.Threading.Thread.Sleep(25);
+            System.Threading.Thread.Sleep(50);
 
             //Act
             fs.CreateDirectory(newDirectoryName);
 
             //Assert
             var subDirs = _testDirectory.GetDirectories();
-            subDirs.Count().Should().Be(1);
+            subDirs.Length.Should().Be(1);
             subDirs.Single(di => di.FullName == newDirectoryName).CreationTimeUtc.Should().Be(createdDate);
-
         }
     }
 }

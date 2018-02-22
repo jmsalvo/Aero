@@ -15,10 +15,10 @@ namespace Aero.Build
         {
             context.Information("Setting things up...");
 
-            context.Configuration = context.Argument("configuration", "Release");
+            context.Configuration = "Release"; //Force Release so Aero.Build can reference Aero.Cake and not a NuGet. context.Argument("configuration", "Release");
             context.Target = context.Argument("target", "Default");
             context.ServiceProvider = BuildServiceProvider(context);
-            context.SolutionFile = $"{context.RepoRootPath}/{context.Argument("solutionFile", "Aero.Common.Azure.sln")}";
+            context.SolutionFile = $"{context.RepoRootPath}/{context.Argument("solutionFile", "Aero.sln")}";
             
         }
 
