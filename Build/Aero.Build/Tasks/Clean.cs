@@ -3,15 +3,12 @@ using Cake.Frosting;
 
 namespace Aero.Build.Tasks
 { 
-    public class Clean : FrostingTask<Context>
+    public class Clean : FrostingTask<MyContext>
     {
-        public override void Run(Context context)
+        public override void Run(MyContext context)
         {
-            //Aero.Build references Aero.Cake -> Aero. We'll execute Aero.Build in debug, but build
-            //Aero under release, so just clean Release. 
-
-            var directories = context.GetDirectories($"{context.ProjectsPath}/**/bin/Release")
-                + context.GetDirectories($"{context.ProjectsPath}/**/obj/Release");
+            var directories = context.GetDirectories($"{context.ProjectsPath}/**/bin")
+                + context.GetDirectories($"{context.ProjectsPath}/**/obj");
 
             foreach (var directory in directories)
             {
