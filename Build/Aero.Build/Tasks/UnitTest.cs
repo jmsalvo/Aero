@@ -7,9 +7,9 @@ namespace Aero.Build.Tasks
 {
     public class UnitTest : FrostingTask<MyContext>
     {
-        private readonly IDotNetCoreWrapper _dotNetCore;
+        private readonly IDotNetWrapper _dotNetCore;
 
-        public UnitTest(IDotNetCoreWrapper dotNetCore)
+        public UnitTest(IDotNetWrapper dotNetCore)
         {
             _dotNetCore = dotNetCore;
         }

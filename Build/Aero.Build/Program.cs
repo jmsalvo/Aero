@@ -25,7 +25,7 @@ namespace Aero.Build
             //Services
 
             //Wrappers
-            services.AddSingleton<IDotNetCoreWrapper, DotNetCoreWrapper>();
+            services.AddSingleton<IDotNetWrapper, DotNetWrapper>();
             services.AddSingleton<IVersionService, VersionService>();
         }
     }

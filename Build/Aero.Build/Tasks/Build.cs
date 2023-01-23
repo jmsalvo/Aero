@@ -16,10 +16,10 @@ namespace Aero.Build.Tasks
     /// </remarks>
     public class Build : FrostingTask<MyContext>
     {
-        private readonly IDotNetCoreWrapper _dotNetCore;
+        private readonly IDotNetWrapper _dotNetCore;
         private readonly IVersionService _versionService;
 
-        public Build(IDotNetCoreWrapper dotNetCore, IVersionService versionService)
+        public Build(IDotNetWrapper dotNetCore, IVersionService versionService)
         {
             _dotNetCore = dotNetCore;
             _versionService = versionService;
